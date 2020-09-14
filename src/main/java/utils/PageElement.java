@@ -77,7 +77,6 @@ public class PageElement {
     public void clickOnButton(WebElement webElement){
         waitForElementVisibility(webElement);
         webElement.click();
-        waitForElementDisappear(webElement);
     }
 
     public void enterTextToInputField(String itemToTypeIn, WebElement inputField) {

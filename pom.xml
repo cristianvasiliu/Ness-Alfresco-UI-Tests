@@ -21,6 +21,8 @@
     </build>
 
     <dependencies>
+
+        <!--BASICS-->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -32,16 +34,16 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.1.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
 
+        <!--LOGGER-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.13.1</version>
+        </dependency>
 
     </dependencies>
 
