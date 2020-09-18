@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ public class PageElement {
     private final long TIMEOUT_POLL_MILLISECONDS = 1000;
 
     private WebDriver driver;
+
     public PageElement(WebDriver driver) {
         this.driver = driver;
     }
@@ -44,37 +46,37 @@ public class PageElement {
     }
 
     public void waitForElementDisappear(WebElement webElement) {
-        try{
+        try {
             new WebDriverWait(driver, TIMEOUT_ELEMENT_DISAPPEAR_SECONDS,
                     TIMEOUT_POLL_MILLISECONDS).until(ExpectedConditions
                     .invisibilityOfAllElements(Collections.singletonList(webElement)));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.getStackTrace();
         }
     }
 
     public void waitForElementAttributeVisibility(WebElement webElement, String value) {
         WebDriverWait webDriverWait = new WebDriverWait(driver, TIMEOUT_SECONDS);
-        webDriverWait.until(ExpectedConditions.attributeToBe(webElement,"style", value));
+        webDriverWait.until(ExpectedConditions.attributeToBe(webElement, "style", value));
     }
 
-    public void selectFirstSearchedItem(List<WebElement> containerList){
-        for (WebElement webElement : containerList){
+    public void selectFirstSearchedItem(List<WebElement> containerList) {
+        for (WebElement webElement : containerList) {
             webElement.click();
             break;
         }
     }
 
-    public void selectIndexItem(List<WebElement> containerList, String value){
-        for (WebElement webElement : containerList){
-            if (webElement.getAttribute("index").contentEquals(value)){
+    public void selectIndexItem(List<WebElement> containerList, String value) {
+        for (WebElement webElement : containerList) {
+            if (webElement.getAttribute("index").contentEquals(value)) {
                 webElement.click();
                 break;
             }
         }
     }
 
-    public void clickOnButton(WebElement webElement){
+    public void clickOnButton(WebElement webElement) {
         waitForElementVisibility(webElement);
         webElement.click();
     }
@@ -87,7 +89,7 @@ public class PageElement {
 
     public void getWebElementCssClass(WebElement webElement, String value) {
         WebDriverWait webDriverWait = new WebDriverWait(driver, 1);
-        webDriverWait.until(ExpectedConditions.attributeToBe(webElement,"class", value));
+        webDriverWait.until(ExpectedConditions.attributeToBe(webElement, "class", value));
     }
 
     public void scrollToElementWithWait(WebElement webElement) {
@@ -100,12 +102,35 @@ public class PageElement {
         sleep(5000);
     }
 
-    public static void sleep(long miliseconds) {
+    public void sleep(long miliseconds) {
         try {
             Thread.sleep(miliseconds);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    /**
+     * Executes click action on element provided with JS Executor
+     *
+     * @param webElement
+     */
+    public void clickWithJSExecutor(WebElement webElement) {
+        waitForElementVisibility(webElement);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", webElement);
+    }
+
+    public void clickOnItem(By elementPath) {
+        waitForElementVisibility(elementPath);
+        WebElement webElement = driver.findElement(elementPath);
+        moveMouseOver(webElement);
+        webElement.click();
+    }
+
+    private void waitForElementVisibility(By webElementLocator) {
+        new WebDriverWait(driver, TIMEOUT_SECONDS, TIMEOUT_POLL_MILLISECONDS)
+                .until(ExpectedConditions.visibilityOfElementLocated(webElementLocator));
     }
 
 }
