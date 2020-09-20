@@ -40,6 +40,11 @@ public class PageElement {
         sleep(1000);
     }
 
+    public void waitForAnimatedElementVisibility(By webElement) {
+        new WebDriverWait(driver, 1)
+                .until(ExpectedConditions.presenceOfElementLocated(webElement));
+    }
+
     private void moveMouseOver(WebElement webElement) {
         waitForElementVisibility(webElement);
         new Actions(driver).moveToElement(webElement).perform();
@@ -47,9 +52,17 @@ public class PageElement {
 
     public void waitForElementDisappear(WebElement webElement) {
         try {
-            new WebDriverWait(driver, TIMEOUT_ELEMENT_DISAPPEAR_SECONDS,
-                    TIMEOUT_POLL_MILLISECONDS).until(ExpectedConditions
-                    .invisibilityOfAllElements(Collections.singletonList(webElement)));
+            new WebDriverWait(driver, TIMEOUT_ELEMENT_DISAPPEAR_SECONDS, TIMEOUT_POLL_MILLISECONDS)
+                    .until(ExpectedConditions.invisibilityOfAllElements(Collections.singletonList(webElement)));
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    public void waitForItemDisappear(By webElement) {
+        try {
+            new WebDriverWait(driver, TIMEOUT_ELEMENT_DISAPPEAR_SECONDS, TIMEOUT_POLL_MILLISECONDS)
+                    .until(ExpectedConditions.invisibilityOfElementLocated(webElement));
         } catch (Exception e) {
             e.getStackTrace();
         }

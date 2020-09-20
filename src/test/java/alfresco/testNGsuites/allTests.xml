@@ -4,7 +4,7 @@
 
     <test name="UI Alfresco tests">
         <classes>
-            <class name="alfresco.tests.CreateRepositoryTests"/>
+            <class name="alfresco.tests.CreateNewFolderTests"/>
         </classes>
     </test>
 
