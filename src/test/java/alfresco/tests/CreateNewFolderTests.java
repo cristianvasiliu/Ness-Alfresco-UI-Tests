@@ -80,7 +80,7 @@ public class CreateNewFolderTests extends BaseUiTest {
         pageElement.clickOnButton(filesPage.getNewFolderCreateBtn());
         pageElement.waitForElementDisappear(filesPage.getNewFolderCreateBtn());
 
-        LOGGER.info("New folder" + randomGeneratedFolderName + " was created successfully.");
+        LOGGER.info("New folder " + randomGeneratedFolderName + " was created successfully.");
         LOGGER.info("Search to find the newly created folder will be performed.");
 
         boolean foundNewlyCreatedFolder = false;
@@ -113,6 +113,8 @@ public class CreateNewFolderTests extends BaseUiTest {
         pageElement.enterTextToInputField(randomGeneratedFolderName, filesPage.getNameInputNewFolderModal());
         pageElement.clickOnButton(filesPage.getNewFolderCreateBtn());
 
+        LOGGER.info("Create New Folder button was pressed.");
+
         // assert that modal is still displayed and not closed
         assert (filesPage.getNewFolderModal().isDisplayed());
         pageElement.waitForAnimatedElementVisibility(filesPage.getHiddenAlertModal());
@@ -123,12 +125,18 @@ public class CreateNewFolderTests extends BaseUiTest {
 
         String expectedSameNameErrorMessage = "There's already a folder with this name. Try a different name.";
         assert expectedSameNameErrorMessage.equals(actualSameNameErrorMessage);
+
+        LOGGER.info("Error message regarding 'same folder name already exists', was displayed.");
     }
 
     @AfterClass
-    public void removeNewlyFolderCreated() {
+    public void removeNewlyCreatedFolder() {
+        LOGGER.info("'After Class' removal of newly created folder has begun.");
+
         pageElement.clickOnButton(filesPage.getNewFolderCancelBtn());
         pageElement.waitForElementDisappear(filesPage.getNewFolderCancelBtn());
+
+        LOGGER.info("Cancel New Folder creation button was pressed.");
 
         foldersListElements = filesPage.getFolderListElement().findElements(By.cssSelector(
                 "#document-list-container > adf-upload-drag-area > div > div > adf-document-list > adf-datatable > div > div.adf-datatable-body > adf-datatable-row"));
@@ -139,13 +147,11 @@ public class CreateNewFolderTests extends BaseUiTest {
                 pageElement.scrollToElementWithWait(element);
                 WebElement elementThreeDotsBtn = element.findElement(By.cssSelector("div > button > span > mat-icon"));
 
-                // TODO: delete print console message in a final commit
-                System.out.println("3button element was found and saved as an web element");
+                LOGGER.info("3button element was found and saved as an web element.");
 
                 pageElement.clickOnButton(elementThreeDotsBtn);
 
-                // TODO: delete print console message in a final commit
-                System.out.println("folder properties button was clicked");
+                LOGGER.info("Folder properties button was clicked.");
 
                 pageElement.scrollToElementWithWait(filesPage.getDeleteAllFoldersBtn());
 
@@ -166,8 +172,8 @@ public class CreateNewFolderTests extends BaseUiTest {
 
         String expectedDeletionConfirmedMessage = randomGeneratedFolderName + " deleted";
         assert expectedDeletionConfirmedMessage.equals(actualDeletionConfirmedMessage);
-    }
 
-    // TODO NEXT: add LOGGER for all tests, update README file
+        LOGGER.info("Newly created folder was deleted.");
+    }
 
 }
