@@ -9,7 +9,7 @@
 - application to test --> https://github.com/magemello/adf-automation-qa
 
 ## Description 
-###Describes of how to run the automation test
+### Describes of how to run the automation test
 - Download ZIP file with the repository or copy the HTTPS link and (the recommended choice, the last one)
 - Open your IDE and click on "Import from version control"
 - Once the repository is on the local machine, run "Build Project" in order to make sure everything is ok
@@ -20,7 +20,7 @@
 - Run tests by clicking on the IDE's Run button, along with the above configuration
 
 ## Explanation 
-###Describes the choice made in the solution
+### Describes the choice made in the solution
 - Page object model (POM) is chosen as a design for this repository
 - POM file contains all the dependencies necessary to run tests
 - allTests.xml contains a configuration to run tests by class name

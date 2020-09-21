@@ -41,9 +41,6 @@ public class CreateNewFolderTests extends BaseUiTest {
 
     @Test(priority = 1)
     public void loginIntoWebsiteTest() {
-        // TODO: delete print console message in a final commit
-        System.out.println("Folder name to be created: " + randomGeneratedFolderName);
-
         LOGGER.info("loginIntoWebsiteTest test has begun");
 
         pageElement.clickOnButton(settingsPage.getSelectProviderArrow());
@@ -72,6 +69,8 @@ public class CreateNewFolderTests extends BaseUiTest {
         LOGGER.info("Alfresco Files Page was loaded successfully.");
         // added sleep in order to wait for home page to fully load
         pageElement.sleep(2000);
+
+        LOGGER.info("Folder name to be created: " + randomGeneratedFolderName);
 
         pageElement.clickOnButton(filesPage.getNewFolderBtn());
         pageElement.waitForElementVisibility(filesPage.getNewFolderModal());
