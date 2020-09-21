@@ -4,7 +4,7 @@
 
 - IDE (IntelliJ)
 - Maven
-- Chrome web-driver downloaded to src/test/resources/drivers
+- Chrome web-driver downloaded to src/test/resources/drivers: update in tests also newly chromedriver name (e.g. chromedriver_85-0-4183-87)
 - openjdk version "1.8.0_222" at least
 - application to test --> https://github.com/magemello/adf-automation-qa
 
